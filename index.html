@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link href="https://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet">
+
+	<title>Lemmy: FWD</title>
+</head>
+<body style="margin: 3em; font-family: 'PT Mono', monospace;font-size: 155%;">
+
+<strong>Loading...</strong>
+
+<script type="text/javascript">
+
+//https://aussie.zone/c/sydney
+//https://pushka.com/l/#https://aussie.zone/c/sydney
+
+function url_domain(data) {
+  var    a      = document.createElement('a');
+         a.href = data ;
+		 var temphost = a.hostname + "";
+		   temphost = temphost.replace("https://www.", "");
+  temphost = temphost.replace("http://www.", "");
+  temphost = temphost.replace("https://", "");
+  temphost = temphost.replace("http://", "");
+  return  temphost;
+} //return hostname / domain only 
+
+function url_not_domain(data) {
+		 var subfolder =     data.replace(url_domain(data), "");
+  subfolder = subfolder.replace("https://www.", "");
+  subfolder = subfolder.replace("http://www.", "");
+  subfolder = subfolder.replace("https://", "");
+  subfolder = subfolder.replace("http://", "");
+		 return subfolder;
+}//return everything except the domain 
+
+window.onload = function(e){ 
+   
+if(window.location.hash) {
+  // Fragment exists
+  
+    var url = window.location.hash;
+ 
+  url = url.substring(1);
+  
+  var domain = url_domain(url) ;
+    domain = domain.replace("https://www.", "");
+  domain = domain.replace("http://www.", "");
+  domain = domain.replace("https://", "");
+  domain = domain.replace("http://", "");
+  
+  var subfolder = url_not_domain(url) ;
+  //  subfolder = subfolder.replace("//", "/");
+   // subfolder = subfolder.replace("//", "/");
+
+  var newdomain = "https://beehaw.org" + subfolder+     "@" +domain;
+   // subfolder = subfolder.replace('https:/c/', "/c/");
+   
+      newdomain = newdomain.replace("https://www.", "");
+  newdomain = newdomain.replace("http://www.", "");
+  newdomain = newdomain.replace("https://", "");
+  newdomain = newdomain.replace("http://", "");
+  
+  //alert(newdomain );
+//https://beehaw.org/u/withersailor@aussie.zone
+//https://beehaw.org/c/australia@lemmy.ml
+window.location.replace("https://"+newdomain);
+
+} else {
+  // Fragment doesn't exist
+  //window.location.replace('https://pushka.com');
+  //alert( 'error-no thing');
+   window.location.replace('https://beehaw.org/');
+}
+
+} // END ONLOAD
+
+
+
+</script>
+
+
+</body>
+</html>
